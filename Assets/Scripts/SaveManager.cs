@@ -7,9 +7,11 @@ public class SaveManager : MonoBehaviour
     public static SaveManager Instance;
     public String PlayerName;
 
-    public int score = 0;
+    public String PlayerNameTemp;
 
-    
+    public int score;
+
+
 
 
     private void Awake()
@@ -20,6 +22,7 @@ public class SaveManager : MonoBehaviour
             return;
         }
         Instance = this;
+
         DontDestroyOnLoad(gameObject);
         LoadDatas();
 
@@ -47,11 +50,17 @@ public class SaveManager : MonoBehaviour
         string path = Application.persistentDataPath + "/DataPersistenceProject_savefile.json";
         if (File.Exists(path))
         {
+            Debug.Log("Save file exist - get data");
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             PlayerName = data.PlayerName;
             score = data.score;
+        }
+        else
+        {
+            Debug.Log("Save file doesn't exist - initialize data");
+            score = 0;
         }
     }
 

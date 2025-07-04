@@ -14,7 +14,7 @@ public class MainManager : MonoBehaviour
 
     public Text ScoreText;
 
-    
+
     public GameObject GameOverText;
 
     private bool m_Started = false;
@@ -47,7 +47,7 @@ public class MainManager : MonoBehaviour
             }
         }
         maxPoint = SaveManager.Instance.score;
-        playerName = SaveManager.Instance.PlayerName;
+        playerName = SaveManager.Instance.PlayerNameTemp;
         DisplayBestScore();
     }
 
@@ -89,13 +89,17 @@ public class MainManager : MonoBehaviour
         {
             maxPoint = m_Points;
             SaveManager.Instance.score = maxPoint;
+            SaveManager.Instance.PlayerName = playerName;
         }
+
+        SaveManager.Instance.SaveDatas();
 
     }
 
     public void DisplayBestScore()
     {
+     
         Debug.Log("MainManager::DisplayBestScore::Name : " + SaveManager.Instance.PlayerName);
-        bestScoreText.text = "Best Score : " + playerName + " -> " + maxPoint;
+        bestScoreText.text = "Best Score : " + SaveManager.Instance.PlayerName + " -> " + maxPoint;
     }
 }
