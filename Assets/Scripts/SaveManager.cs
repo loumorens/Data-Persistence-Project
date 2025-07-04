@@ -7,7 +7,7 @@ public class SaveManager : MonoBehaviour
     public static SaveManager Instance;
     public String PlayerName;
 
-    public int score;
+    public int score = 0;
 
     
 
